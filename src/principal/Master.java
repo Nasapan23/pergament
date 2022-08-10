@@ -7,9 +7,13 @@ public class Master {
 		int Length=input.nextInt();
 		int Width=input.nextInt();
 		int LenStr=input.nextInt();
-		int[][] Fpergament;
-		Fpergament= new int[Length][Width];
-		HorizontalStreet(Length,Width);
+		int[][] FPergament;
+		FPergament= new int[Length][Width];
+		
+		//All the math
+		HorizontalStreet(Length,Width,FPergament);
+		VerticalStreet(Length,Width,FPergament);
+		CollisionVerifier(Length,Width,FPergament);
 }	
 	public static void HorizontalStreet(int Length,int Width,int[][] FPergament) {
 				//Generation Variables for n-1 streets
@@ -43,11 +47,12 @@ public class Master {
 					   if((j>=StreetPos[i])&&(cnt<StreetLength[i])) {
 						   FPergament[i][j]=FPergament[i][j]+1;
 					   }
+					   cnt++;
 			 }
 		}
 	}
 
-	public static void VerticalStreets(int[][] Fpergament,int Length,int Width[]) {
+	public static void VerticalStreet(int Length,int Width,int[][] FPergament) {
 
 		int VertLine=input.nextInt();
 		for(int q=1;q<=VertLine;q++) {
@@ -55,12 +60,21 @@ public class Master {
 			int VRow=input.nextInt();
 			int VLength=input.nextInt();
 			for(int i=VRow;i<=VLength;i++) {
-				Fpergament[i][VColumn]=Fpergament[i][VColumn];
+				FPergament[i][VColumn]=FPergament[i][VColumn]+2;
 			}
 		}
 	}
-	public static void main(String args[]) {
-		int colisions;
+	public static void CollisionVerifier(int Length,int Width,int[][] FPergament) {
+		int collisions=0;
+		for(int i=1;i<=Length;i++)
+			for(int j=1;j<=Width;j++) {
+				if(FPergament[i][j]==3)
+					collisions=1;
+			}
+		System.out.println(collisions);
+	}
+	public static void main(String[] args) {
+		pergament();
 		}
 }
 
